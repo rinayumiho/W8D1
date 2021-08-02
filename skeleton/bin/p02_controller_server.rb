@@ -1,5 +1,6 @@
 require 'rack'
 require_relative '../lib/controller_base'
+require 'byebug'
 
 class MyController < ControllerBase
   def go
@@ -13,7 +14,9 @@ end
 app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new
+  
   MyController.new(req, res).go
+  debugger
   res.finish
 end
 
